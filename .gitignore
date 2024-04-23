@@ -158,6 +158,10 @@ Lib/
 Scripts/
 Include/
 
+# Data folders
+data/
+DATA/
+Data/
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
