@@ -142,3 +142,21 @@ class JSONParse:
         paragraph = self.json.get('lead_paragraph')
         output = (self.article_id, paragraph)
         return(output)
+    #For each result get the column headers for the resulting
+    #dataframe
+    def parsed_columns(self, table):
+
+        table_col_dict = {
+            'facts':['article_id', 'publication_date',
+                             'word_count', 'total_keywords',
+                             'total_authors', 'words_in_headline',
+                             'in_print', 'print_page', 'print_section',
+                             'news_desk', 'section_name', 'article_type'],
+            'authors':['article_id', 'rank', 'role',
+                               'firstname', 'middlename', 'lastname', 'qualifier'],
+            'subjects':['article_id', 'rank', 'name', 'value', 'major'],
+            'text':['article_id', 'text']
+        }
+
+        headers = table_col_dict.get(table)
+        return(headers)
