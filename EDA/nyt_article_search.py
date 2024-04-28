@@ -41,7 +41,7 @@ class JSONParse:
         if set(['print_section', 'print_page']).issubset(self.json.keys()) == True:
             #If it was say so & get the page and section
             in_print = True
-            print_page = int(self.json.get('print_page'))
+            print_page = self.json.get('print_page')
             print_section = self.json.get('print_section')
         else:
             #If not say so and set the page and section to None
@@ -97,66 +97,43 @@ class JSONParse:
     def search_article_keywords(self,subject):
         ##accepted keyword variable is name
         ## keywords - subject, organizations, glocations, persons.
-
-        
-        
-        # #Get a list of each keyword dictionary object
-        keyword_dict_list = self.json.get('keywords')
-        
-        #Create a set of all subjects when looking up name in each dictionary
-        keyword_subjects = set([d.get('name') for d in keyword_dict_list])
-        #If it is empty return None
-        if len(keyword_dict_list) == 0:
-            return(None)
-        #If the subject being looked up is not in the dictionaries return None
-        elif subject in keyword_subjects == False:
-            return(None)
-        # Else get all the info associated with the subject being searched
-        # Return a list of tuples
+        if subject not in ['subject', 'organizations', 'glocations', 'persons']:
+            raise Exception(f'Subject {subject} not searchable!')
         else:
-            subject_return = [
-                                (
-                                 self.article_id,
-                                 d.get('rank'), 
-                                 d.get('name'), 
-                                 d.get('value'), 
-                                 d.get('major')
-                                 )
-                                for d in keyword_dict_list if subject in d.values()
-                            ]
-            return(subject_return)
-    #Get the headline for each article
-    def get_headline(self):
-        main_headline = self.json.get('headline')['main']
-        output = (self.article_id, main_headline)
-        return(output)
-    
-    #Get the abstract for each article
-    def get_absract(self):
-        abstract = self.json.get('abstract')
-        output = (self.article_id, abstract)
-        return(output)
-    
-    #Get the lead paragraph for each article
-    def get_lead_paragraph(self):
-        paragraph = self.json.get('lead_paragraph')
-        output = (self.article_id, paragraph)
-        return(output)
-    #For each result get the column headers for the resulting
-    #dataframe
-    def parsed_columns(self, table):
-
-        table_col_dict = {
-            'facts':['article_id', 'publication_date',
-                             'word_count', 'total_keywords',
-                             'total_authors', 'words_in_headline',
-                             'in_print', 'print_page', 'print_section',
-                             'news_desk', 'section_name', 'article_type'],
-            'authors':['article_id', 'rank', 'role',
-                               'firstname', 'middlename', 'lastname', 'qualifier'],
-            'subjects':['article_id', 'rank', 'name', 'value', 'major'],
-            'text':['article_id', 'text']
-        }
-
-        headers = table_col_dict.get(table)
-        return(headers)
+            # #Get a list of each keyword dictionary object
+            keyword_dict_list = self.json.get('keywords')
+            
+            #Create a set of all subjects when looking up name in each dictionary
+            keyword_subjects = set([d.get('name') for d in keyword_dict_list])
+            #If it is empty return None
+            if len(keyword_dict_list) == 0:
+                return(None)
+            #If the subject being looked up is not in the dictionaries return None
+            elif subject in keyword_subjects == False:
+                return(None)
+            # Else get all the info associated with the subject being searched
+            # Return a list of tuples
+            else:
+                subject_return = [
+                                    (
+                                    self.article_id,
+                                    d.get('rank'), 
+                                    d.get('name'), 
+                                    d.get('value'), 
+                                    d.get('major')
+                                    )
+                                    for d in keyword_dict_list if subject in d.values()
+                                ]
+                return(subject_return)
+    #Get text fields in each article
+    def get_text(self, text):
+        if text not in ['headline', 'web_url', 'lead_paragraph', 'abstract']:
+            raise Exception('Text {text} not searchable!')
+        else:
+            if text == 'headline':
+                text_data = self.json.get(text)['main']
+            else:
+                text_data = self.json.get(text)
+            output = (self.article_id, text_data)
+            return(output)
+        
