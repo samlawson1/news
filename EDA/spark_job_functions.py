@@ -74,3 +74,70 @@ def standardize_text(clean_df, clean_col, dim_df):
     clean_df = clean_df.replace(text_mapping, subset = [clean_col])
     return(clean_df)
 
+
+def final_col_order(table):
+
+    table_header_dict = {
+        'facts':['fact_id', 'publication_date', 'word_count', 'total_keywords', 'total_authors',
+                 'words_in_headline', 'in_print', 'print_page', 'print_section',
+                 'article_type_id', 'news_desk_id', 'section_name_id'],
+        'authors':['table_id', 'fact_id', 'author_role', 'role_rank',
+                   'first_name', 'middle', 'last_name', 'qualifier'],
+        'subject_people':['table_id', 'fact_id', 'subject_id', 'subject_rank', 'major_subject',
+                          'first_name', 'middle', 'last_name', 'qualifier'],
+        'subject_others':['table_id', 'fact_id', 'subject_id', 'subject_rank', 'major_subject', 'subject']
+    }
+    headers = table_header_dict.get(table)
+    return(headers)
+
+def schema_validation(table):
+    schema_dict = {
+    'facts':[
+            StructField('fact_id', IntegerType(), False),
+            StructField('publication_date', DateType(), True),
+            StructField('word_count', IntegerType(), True),
+            StructField('total_keywords', IntegerType(), True),
+            StructField('total_authors', IntegerType(), True),
+            StructField('words_in_headline', IntegerType(), True),
+            StructField('in_print', BooleanType(), True),
+            StructField('pring_page', FloatType(), True),
+            StructField('print_section', StringType(), True),
+            StructField('article_type_id', IntegerType(), True),
+            StructField('news_desk_id', IntegerType(), True),
+            StructField('section_name_id', IntegerType(), True)
+            ],
+    'authors':[
+            StructField('table_id', FloatType(), False),
+            StructField('fact_id', IntegerType(), False),
+            StructField('author_role', StringType(), True),
+            StructField('role_rank', IntegerType(), True),
+            StructField('first_name', StringType(), True),
+            StructField('middle' ,StringType(), True),
+            StructField('last_name', StringType(), True),
+            StructField('qualifier', StringType(), True)
+            ],
+    'subject_people':[
+            StructField('table_id', FloatType(), False),
+            StructField('fact_id', IntegerType(), False),
+            StructField('subject_id', IntegerType(), True),
+            StructField('subject_rank', IntegerType(), True),
+            StructField('major_subject', BooleanType(), True),
+            StructField('first_name', StringType(), True),
+            StructField('middle' ,StringType(), True),
+            StructField('last_name', StringType(), True),
+            StructField('qualifier', StringType(), True)
+            ],
+    'subject_others':[
+        StructField('table_id', FloatType(), False),
+        StructField('fact_id', IntegerType(), False),
+        StructField('subject_id', IntegerType(), True),
+        StructField('subject_rank', IntegerType(), True),
+        StructField('major_subject', BooleanType(), True),
+        StructField('subject', StringType(), True)
+            ]
+    }
+    schema = schema_dict.get(table)
+    return(schema)
+
+
+
