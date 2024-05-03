@@ -1,8 +1,7 @@
-from pyspark.sql import SparkSession
+# from pyspark.sql import SparkSession
 from pyspark.sql import Window
 from pyspark.sql import functions as f
 from pyspark.sql.types import *
-from itertools import chain
 
 #Function to extend lists of tuples returned from JSON Parsing
 def extend_list(list_name, function_result):
@@ -76,7 +75,7 @@ def standardize_text(clean_df, clean_col, dim_df):
 
 
 def final_col_order(table):
-
+    #Function to ensure columns are in correct order
     table_header_dict = {
         'facts':['fact_id', 'publication_date', 'word_count', 'total_keywords', 'total_authors',
                  'words_in_headline', 'in_print', 'print_page', 'print_section',
@@ -91,7 +90,12 @@ def final_col_order(table):
     return(headers)
 
 def schema_validation(table):
+    #Function to validate schema before writing to database
     schema_dict = {
+    'article_ids':[
+            StructField('fact_id', IntegerType(), False),
+            StructField('article_id', StringType(), False)
+            ],
     'facts':[
             StructField('fact_id', IntegerType(), False),
             StructField('publication_date', DateType(), True),
@@ -134,6 +138,22 @@ def schema_validation(table):
         StructField('subject_rank', IntegerType(), True),
         StructField('major_subject', BooleanType(), True),
         StructField('subject', StringType(), True)
+            ],
+    'dim_article_types':[
+        StructField('article_type_id', IntegerType(), False),
+        StructField('artice_type', StringType(), False)
+            ],
+    'dim_news_desks':[
+        StructField('news_desk_id', IntegerType(), False),
+        StructField('news_desk', StringType(), False)
+            ],
+    'dim_section_names':[
+        StructField('section_name_id', IntegerType(), False),
+        StructField('section_name', StringType(), False)
+            ],
+    'dim_subject_ids':[
+        StructField('subject_id', IntegerType(), False),
+        StructField('subject_name', StringType(), False)
             ]
     }
     schema = schema_dict.get(table)
