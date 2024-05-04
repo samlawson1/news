@@ -2,6 +2,21 @@
 from pyspark.sql import Window
 from pyspark.sql import functions as f
 from pyspark.sql.types import *
+from pyspark import SparkConf
+
+
+def spark_config(warehouse):
+    #SparkSession Configuration
+    configuration = SparkConf()\
+        .setAppName('NYT_ArticleSearch')\
+        .setMaster('local[4]')\
+        .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions')\
+        .set('spark.sql.catalog.nyt', 'org.apache.iceberg.spark.SparkCatalog')\
+        .set('spark.sql.catalog.nyt.type', 'hadoop')\
+        .set('spark.sql.catalog.nyt.warehouse', warehouse)
+    return(configuration)
+
+
 
 #Function to extend lists of tuples returned from JSON Parsing
 def extend_list(list_name, function_result):
@@ -141,7 +156,7 @@ def schema_validation(table):
             ],
     'dim_article_types':[
         StructField('article_type_id', IntegerType(), False),
-        StructField('artice_type', StringType(), False)
+        StructField('article_type', StringType(), False)
             ],
     'dim_news_desks':[
         StructField('news_desk_id', IntegerType(), False),
