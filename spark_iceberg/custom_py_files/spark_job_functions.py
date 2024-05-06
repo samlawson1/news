@@ -1,9 +1,7 @@
-# from pyspark.sql import SparkSession
+from pyspark import SparkConf
 from pyspark.sql import Window
 from pyspark.sql import functions as f
 from pyspark.sql.types import *
-from pyspark import SparkConf
-
 
 def spark_config(warehouse):
     #SparkSession Configuration
@@ -177,6 +175,7 @@ def schema_validation(table):
     return(schema)
 
 def duplicate_check(df, primary_key, df_name):
+    #Quality check before writing data to tables
     #Count total rows and distinct rows by primary key
     total_rows = df.select(primary_key).count()
     distinct_rows = df.select(primary_key).distinct().count()
