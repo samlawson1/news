@@ -119,7 +119,7 @@ def schema_validation(table):
             StructField('total_authors', IntegerType(), True),
             StructField('words_in_headline', IntegerType(), True),
             StructField('in_print', BooleanType(), True),
-            StructField('pring_page', FloatType(), True),
+            StructField('print_page', FloatType(), True),
             StructField('print_section', StringType(), True),
             StructField('article_type_id', IntegerType(), True),
             StructField('news_desk_id', IntegerType(), True),
@@ -174,5 +174,15 @@ def schema_validation(table):
     schema = schema_dict.get(table)
     return(schema)
 
+def duplicate_check(df, primary_key, df_name):
+    #Count total rows and distinct rows by primary key
+    total_rows = df.select(primary_key).count()
+    distinct_rows = df.select(primary_key).distinct().count()
+    #if total and distinct rows for the primary key match return true
+    if total_rows == distinct_rows:
+        return({df_name:True})
+    #if not return false
+    else:
+        return({df_name:False})
 
 
