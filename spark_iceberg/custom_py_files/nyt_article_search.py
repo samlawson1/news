@@ -8,8 +8,6 @@ class JSONParse:
     def __init__(self, json_response):
         self.json = json_response
         self.article_id = self.get_article_id()
-        # self.article_facts = self.get_article_facts(json_response)
-        # self.authors = self.get_article_authors(json_response)
 
     def get_article_id(self):
         #Get the id string in the resonse
