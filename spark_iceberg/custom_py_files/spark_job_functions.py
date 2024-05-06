@@ -11,6 +11,8 @@ def spark_config(warehouse):
         .setAppName('NYT_ArticleSearch')\
         .setMaster('local[4]')\
         .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions')\
+        .set('spark.sql.catalog.spark_catalog', 'org.apache.iceberg.spark.SparkSessionCatalog')\
+        .set('spark.sql.catalog.spark_catalog.type', 'hive')\
         .set('spark.sql.catalog.nyt', 'org.apache.iceberg.spark.SparkCatalog')\
         .set('spark.sql.catalog.nyt.type', 'hadoop')\
         .set('spark.sql.catalog.nyt.warehouse', warehouse)
