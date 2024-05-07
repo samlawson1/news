@@ -1,4 +1,5 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿# News - The New York Times
+﻿﻿
+# News - The New York Times
 
 ##  **Purpose**
 
@@ -80,7 +81,15 @@ For my schema design, I went with a snowflake style schema with the following ta
     9. dim_subject_ids
     - dimensional table with ID's for the subject categories (persons, glocations, organizations, subject)
 
-![alt text](NYT_ICEBERG_ERD.png)
+
+
+### Part 3 - TensorFlow Machine Learning Model
+
+I am planning on developing a machine learning model to perform a sentiment analysis and identify if there is any bias in the headlines, abstracts, or lead paragraphs for certain states.
+
+**Still in development, stay tuned!**
+
+
 
 
 
