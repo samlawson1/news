@@ -81,6 +81,8 @@ For my schema design, I went with a snowflake style schema with the following ta
     9. dim_subject_ids
     - dimensional table with ID's for the subject categories (persons, glocations, organizations, subject)
 
+![NYT_ICEBERG_ERD](https://github.com/samlawson1/news/assets/52726406/db854fe6-66b9-4bad-b6e7-1605f8644b98)
+
 
 
 ### Part 3 - TensorFlow Machine Learning Model
