@@ -97,6 +97,8 @@ For the scope of this project I chose to stick with a single-label text classifi
 
 Once the model was built, it was tested with nearly 96% accuracy!
 
+![image](https://github.com/samlawson1/news/assets/52726406/2f94ac14-fafb-4c20-ba82-1e510ffd6e11)
+
 
 ### Part 4 - NYT Article Text Classification
 
