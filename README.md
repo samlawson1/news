@@ -85,11 +85,22 @@ For my schema design, I went with a snowflake style schema with the following ta
 
 
 
-### Part 3 - TensorFlow Machine Learning Model
+### Part 3 - TensorFlow Machine Learning Model Development
 
-I am planning on developing a machine learning model to perform a sentiment analysis and identify if there is any bias in the headlines, abstracts, or lead paragraphs for certain states.
+**The model has been developed and tested!**
 
-**Still in development, stay tuned!**
+I am using a text classification model to perform a sentiment analysis on the headlines, abstracts, and lead paragraphs for each New York Times article in order to see if there is any bias among the states.
+
+To train and test my model, I chose to utilzed the [A Million News Headlines](https://www.kaggle.com/datasets/therohk/million-headlines) dataset from Kaggle, which is unlabeled. So the first step to train the model would be to label the data. To do this, I utilzed the [afin](https://pypi.org/project/afinn/) package in python to label the text fields and then randomly filtered the dataset from over 1.2 Million rows to 200,000 rows with a 50/50 split of positive and negative labels.
+
+For the scope of this project I chose to stick with a single-label text classification model, but in the future I would like to try and utilize the AFinn score in some way.
+
+Once the model was built, it was tested with nearly 96% accuracy!
+
+
+### Part 4 - NYT Article Text Classification
+
+**In Progress - Stay Tuned!**
 
 
 
