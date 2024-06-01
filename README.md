@@ -95,7 +95,7 @@ To train and test my model, I chose to utilzed the [A Million News Headlines](ht
 
 For the scope of this project I chose to stick with a single-label text classification model, but in the future I would like to try and utilize the AFinn score in some way.
 
-Once the model was built, it was tested with nearly 96% accuracy!
+Once the model was built, it was tested with a 95% accuracy!
 
 ![image](https://github.com/samlawson1/news/assets/52726406/2f94ac14-fafb-4c20-ba82-1e510ffd6e11)
 
