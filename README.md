@@ -23,7 +23,8 @@ When we look at the headline sentiment by each state (the state is a main subjec
 
 3. Illinois and Washington skew more negatively than other established liberal states.
 
-![sentiment_map](https://github.com/samlawson1/news/assets/52726406/b5d35750-41c3-403b-8586-c251dd6c7192)
+![sentiment_map](https://github.com/samlawson1/news/assets/52726406/ba284363-eaa5-480c-80bf-dc76b63282f9)
+
 
 ### **Headline sentiment when the article is about particular people**
 
@@ -31,7 +32,8 @@ The data allows us to look at how often certain people are written about and _po
 
 What is surprising (at least to me) is that Barack Obama has the lowest sentiment score out of the top 10 most written about people.
 
-![most_written_about_people](https://github.com/samlawson1/news/assets/52726406/7709cfd2-dbea-49ff-98ae-1cf132f823c6)
+![most_written_about_people](https://github.com/samlawson1/news/assets/52726406/c22db91d-ce15-4d16-960a-679434cfc9ab)
+
 
 ### **News Desk sentiment**
 
@@ -39,11 +41,12 @@ Lastly, I wanted to look at if particular news desks wrote more positive or more
 
 We can see that the Style, Upshot, and Sports desks write the most positive headlines and perhaps surprisingly the Washington and Op-Ed desks round out the top 5.
 
-![positive_sentiment_news_desks](https://github.com/samlawson1/news/assets/52726406/e1c9ac28-d7fc-45a1-81f1-6ef70c20b2c2)
+![positive_sentiment_news_desks](https://github.com/samlawson1/news/assets/52726406/be1cd6a1-26f8-4a97-818d-a1d85dac4d1f)
+
 
 On the negative side of things, Food, Arts, Foreign, Flight, and Science have the most negative headlines.
 
-![negative_sentiment_news_desks](https://github.com/samlawson1/news/assets/52726406/dbe51a55-860f-4223-8b89-4280033718b5)
+![negative_sentiment_news_desks](https://github.com/samlawson1/news/assets/52726406/63b0017e-d39f-40b4-b0d4-bcf83829e74d)
 
 
 ##  **Process Overview**
