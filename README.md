@@ -3,8 +3,50 @@
 
 ##  **Purpose**
 
-The _main_ purpose of this repository is to showcase my use of more advanced analytical tools like Apache Spark, Apache Iceberg, and TensorFlow to produce end-to-end data engineering and machine learning pipelines. [The New York Times provides a host of API's](https://developer.nytimes.com/apis) that make this possible. For this project, I've chosen to focus on their [article search api](https://developer.nytimes.com/docs/articlesearch-product/1/overview) to perform a sentiment analysis on article headlines, abstracts, and lead paragraphs when the subject of the article focuses on one of the 50 states in the United States, and compare how or if the sentiment of how those text fields are written differ among various states.
-##  **Overview**
+The _main_ purpose of this repository is to showcase my use of more advanced analytical tools like Apache Spark, Apache Iceberg, and TensorFlow to produce end-to-end data engineering and machine learning pipelines. [The New York Times provides a host of API's](https://developer.nytimes.com/apis) that make this possible. For this project, I've chosen to focus on their [article search api](https://developer.nytimes.com/docs/articlesearch-product/1/overview) to perform a sentiment analysis on article headlines since the year 2000 when the subject of the article focuses on one of the 50 states in the United States, and compare how or if the sentiment of how those text fields are written differ among various states.
+
+## **Results / Data Analysis**
+
+In my dataset, I originally targeted 5000 total headlines (100 per state), but during the API call I found that there was some overlap among states (API returning the same article info for multiple state calls), so our final dataset has 4693 unique headlines to analyze. Some interesting results were noticed.
+
+### **Total Average Sentiment Score**
+
+According to my model, the average sentiment score across all states is **0.236**. With 1 being a positive headline and 0 being a negative, we can say that this means the headlines in our data are mostly negative.
+
+### **Average Headline Sentiment by State**
+
+When we look at the headline sentiment by each state (the state is a main subject in the article the headline is about) we see a few interesting results.
+
+1. The state of New York is _by far_ the most negatively written about state. An assumption can be made that because the New York Times' writers are actively experiencing what they're writing about there, and because the headlines across all states are mostly negative, that the negative intensity in New York is greater than in other areas.
+
+2. We see the Southeastern region of the US scores more negatively than other regions, and can associate a negative bias towards this region in general.
+
+3. Illinois and Washington skew more negatively than other established liberal states.
+
+![sentiment_map](https://github.com/samlawson1/news/assets/52726406/b5d35750-41c3-403b-8586-c251dd6c7192)
+
+### **Headline sentiment when the article is about particular people**
+
+The data allows us to look at how often certain people are written about and _potentially_ characterized in an article. While the article isn't necesarrily about them individually, it can give us an idea of how the New York Times characterizes them by and large. It is probably unsurprising that the most written about people in our dataset are either U.S. Presidents or Presidential candidates, with Donald Trump being the most frequently written about person at 209 articles.
+
+What is surprising (at least to me) is that Barack Obama has the lowest sentiment score out of the top 10 most written about people.
+
+![most_written_about_people](https://github.com/samlawson1/news/assets/52726406/7709cfd2-dbea-49ff-98ae-1cf132f823c6)
+
+### **News Desk sentiment**
+
+Lastly, I wanted to look at if particular news desks wrote more positive or more negative headlines. To be considered, a news desk needed to have at least 25 articles in the dataset.
+
+We can see that the Style, Upshot, and Sports desks write the most positive headlines and perhaps surprisingly the Washington and Op-Ed desks round out the top 5.
+
+![positive_sentiment_news_desks](https://github.com/samlawson1/news/assets/52726406/e1c9ac28-d7fc-45a1-81f1-6ef70c20b2c2)
+
+On the negative side of things, Food, Arts, Foreign, Flight, and Science have the most negative headlines.
+
+![negative_sentiment_news_desks](https://github.com/samlawson1/news/assets/52726406/dbe51a55-860f-4223-8b89-4280033718b5)
+
+
+##  **Process Overview**
 
 ### **Tools & Languages Used:**
 
@@ -87,11 +129,13 @@ For my schema design, I went with a snowflake style schema with the following ta
 
 ### Part 3 - TensorFlow Machine Learning Model Development
 
-**The model has been developed and tested!**
-
 I am using a text classification model to perform a sentiment analysis on the headlines, abstracts, and lead paragraphs for each New York Times article in order to see if there is any bias among the states.
 
 To train and test my model, I chose to utilzed the [A Million News Headlines](https://www.kaggle.com/datasets/therohk/million-headlines) dataset from Kaggle, which is unlabeled. So the first step to train the model would be to label the data. To do this, I utilzed the [afin](https://pypi.org/project/afinn/) package in python to label the text fields and then randomly filtered the dataset from over 1.2 Million rows to 200,000 rows with a 50/50 split of positive and negative labels.
+
+**I used Google Colab is for developing and training my model. Instead of figuring out what the appropriate packages, dependencies, and infrastructure
+was necessary to do what I wanted locally on my own computer (and waiting a long time to see if the model was trained correctly), Google Colab allowed me to save
+an insane amount of time and frustration!**
 
 For the scope of this project I chose to stick with a single-label text classification model, but in the future I would like to try and utilize the AFinn score in some way.
 
@@ -101,7 +145,7 @@ Once the model was built, it was tested with a 96% accuracy!
 
 ### Part 4 - NYT Article Text Classification
 
-**In Progress - Stay Tuned!**
+Once my model was trained to my satisfaction scoring the article text was as simple as uploading my data to my Google Drive and using Google Colab to score the text! Project complete!
 
 
 
